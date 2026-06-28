@@ -1,0 +1,174 @@
+/* --- BASE STYLES --- */
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f2ddd0; /* Soft warm background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px; /* Prevents container from touching screen edges on phones */
+}
+
+/* --- MAIN CONTAINER --- */
+#Container {
+    width: 100%; /* THIS IS THE FIX! */
+    max-width: 600px; 
+    min-height: 500px;
+    background-color: #FFF0F0;
+    border: 4px solid #f5dede;
+    border-radius: 32px; 
+    box-shadow: 0 0 20px 5px rgba(167, 167, 167, 0.3);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 30px 20px;
+}
+
+/* --- TYPOGRAPHY & MEDIA --- */
+h1 {
+    font-family: 'Fredoka One', sans-serif;
+    font-size: clamp(28px, 6vw, 42px); /* Automatically shrinks text on small screens */
+    color: #83756d;
+    text-align: center;
+}
+
+#kiss {
+    width: 100%;
+    max-width: 250px; /* Scales down if screen is tiny */
+    height: auto;
+    border-radius: 20px;
+}
+
+/* --- BUTTONS LAYOUT --- */
+#buttons {
+    display: flex;
+    flex-direction: row; /* Default desktop row layout */
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    position: relative; /* Anchor point for absolute/fixed items */
+}
+
+/* --- BUTTON STYLES --- */
+#yes,
+#no {
+    width: 160px; 
+    height: 65px;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.12),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+/* Soft pastel pink */
+#yes {
+    background: linear-gradient(135deg, #F7B7C8 0%, #F3A6BC 50%, #EE97B0 100%);
+}
+
+/* Soft beige/peach */
+#no {
+    background: linear-gradient(135deg, #E7C7B7 0%, #DDB5A2 50%, #D3A08C 100%);
+    /* Removed global absolute positioning to let it sit naturally on load */
+    /* Only transitions position natively once JavaScript triggers it */
+    transition: left 0.1s ease, top 0.1s ease, transform 0.25s ease; 
+    z-index: 999;
+}
+
+#yes:hover,
+#no:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 15px 30px rgba(0, 0, 0, 0.18),
+        inset 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+#yes:active,
+#no:active {
+    transform: scale(0.97);
+}
+
+/* --- DATE INPUT WIDGET --- */
+#dateInput {
+    width: 240px;
+    height: 46px;
+    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 0 16px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    border: 1.5px solid #e2e8f0;
+    background-color: #f8fafc;
+    color: #0f172a;
+    outline: none;
+    cursor: pointer;
+    
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: modernReveal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+#dateInput:hover {
+    border-color: #cbd5e1;
+    background-color: #f1f5f9;
+}
+
+#dateInput:focus {
+    border-color: #2563eb;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    transform: scale(1.05); /* Very slight bump up to feel active */
+}
+
+/* Reveal Animation Keyframes for Date Input */
+@keyframes modernReveal {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* --- RESPONSIVE MOBILE FIXES --- */
+@media (max-width: 600px) {
+    #Container {
+        min-height: auto; /* Removes the forced empty height */
+        gap: 20px; /* Brings the heading, image, and buttons closer together */
+        padding: 25px 15px; /* Slightly tighter padding for small screens */
+    }
+
+    #buttons {
+        flex-direction: column; /* Stack buttons cleanly on phone */
+        gap: 15px;
+    }
+
+    #yes, #no {
+        width: 100%; /* Buttons expand to look native on mobile */
+        max-width: 240px; 
+    }
+    
+    #kiss {
+        max-width: 200px; /* Shrinks the gif just a tiny bit on phones */
+    }
+}
